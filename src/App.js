@@ -34,25 +34,18 @@ class App extends React.Component {
   validateForm() {
     const maxNumberPerAtt = 90;
     const maxSumAtt = 210;
-    const {
-      cardName, cardDescription, cardAttr1,
+    const { cardName, cardDescription, cardAttr1,
       cardAttr2, cardAttr3, cardImage } = this.state;
-
-    const array = [cardName, cardDescription, cardImage];
-    const notVoid = array.every((current) => current !== '');
-
-    const arrayNumbers = [Number(cardAttr1), Number(cardAttr2), Number(cardAttr3)];
-
-    const notVoidNumbers = arrayNumbers.every(
-      (current) => (current >= 0 && current <= maxNumberPerAtt),
+    const arrayTotal = [cardName, cardDescription, cardImage,
+      Number(cardAttr1), Number(cardAttr2), Number(cardAttr3)];
+    const sum = arrayTotal.reduce(
+      (acc, current) => typeof current === 'number' && current + acc, 0,
     );
-    const sumTotal = arrayNumbers.reduce((acc, current) => current + acc, 0) <= maxSumAtt;
-
-    if (notVoid && notVoidNumbers && sumTotal) {
-      this.setState({ isSaveButtonDisabled: false });
-    } else {
-      this.setState({ isSaveButtonDisabled: true });
-    }
+    const validate = arrayTotal.every(
+      (current) => (typeof current === 'number' ? current >= 0
+       && current <= maxNumberPerAtt && sum <= maxSumAtt : current !== ''),
+    );
+    this.setState({ isSaveButtonDisabled: !validate });
   }
 
   render() {
