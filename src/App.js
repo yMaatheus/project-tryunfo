@@ -8,6 +8,7 @@ class App extends React.Component {
     this.onInputChange = this.onInputChange.bind(this);
     this.validateForm = this.validateForm.bind(this);
     this.onSaveButtonClick = this.onSaveButtonClick.bind(this);
+    this.onRemoveCardButtonClick = this.onRemoveCardButtonClick.bind(this);
     this.state = {
       cardName: '',
       cardDescription: '',
@@ -55,6 +56,15 @@ class App extends React.Component {
       cardAttr1: 0,
       cardAttr2: 0,
       cardAttr3: 0,
+    });
+  }
+
+  onRemoveCardButtonClick({ target: { name } }) {
+    const { data } = this.state;
+    const card = data.find(({ cardName }) => name === cardName);
+    this.setState({
+      hasTrunfo: card.cardTrunfo ? false : hasTrunfo,
+      data: data.filter((dataCard) => dataCard.cardName !== card.cardName),
     });
   }
 
@@ -116,6 +126,15 @@ class App extends React.Component {
               cardRare={ card.cardRare }
               cardTrunfo={ card.cardTrunfo }
             />
+            <button
+              type="submit"
+              name={ card.cardName }
+              onClick={ this.onRemoveCardButtonClick }
+              data-testid="delete-button"
+            >
+              Excluir
+
+            </button>
           </section>))}
       </main>
     );
