@@ -28,23 +28,29 @@ class App extends React.Component {
     }, this.validateForm);
   }
 
-  onSaveButtonClick() {
-    const { cardName, cardDescription, cardAttr1,
-      cardAttr2, cardAttr3, cardImage, cardRare, cardTrunfo, data } = this.state;
-    const array = [
-      cardName, cardDescription, cardImage,
-      cardRare, cardTrunfo, cardAttr1, cardAttr2, cardAttr3];
-    this.setState({
-      data: [...data, array],
-      cardName: '',
-      cardDescription: '',
-      cardImage: '',
-      cardRare: 'normal',
-      cardTrunfo: false,
-      cardAttr1: 0,
-      cardAttr2: 0,
-      cardAttr3: 0,
-    });
+  onSaveButtonClick(event) {
+    event.preventDefault();
+    const object = {
+      cardName,
+      cardDescription,
+      cardImage,
+      cardRare,
+      cardTrunfo,
+      cardAttr1,
+      cardAttr2,
+      cardAttr3 };
+    this.setState(({ cardName, cardDescription, cardAttr1,
+      cardAttr2, cardAttr3, cardImage, cardRare, cardTrunfo, data }) => ({
+      [data]: [...data, ...object],
+      [cardName]: '',
+      [cardDescription]: '',
+      [cardImage]: '',
+      [cardRare]: 'normal',
+      [cardTrunfo]: false,
+      [cardAttr1]: 0,
+      [cardAttr2]: 0,
+      [cardAttr3]: 0,
+    }));
   }
 
   validateForm() {
