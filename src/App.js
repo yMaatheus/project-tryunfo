@@ -6,6 +6,7 @@ class App extends React.Component {
   constructor() {
     super();
     this.onInputChange = this.onInputChange.bind(this);
+    this.validateForm = this.validateForm.bind(this);
     this.onSaveButtonClick = this.onSaveButtonClick.bind(this);
     this.state = {
       cardName: '',
@@ -23,11 +24,35 @@ class App extends React.Component {
   onInputChange({ target: { type, name, value, checked } }) {
     this.setState({
       [name]: (type === 'checkbox' ? checked : value),
-    });
+    }, this.validateForm);
   }
 
   onSaveButtonClick() {
 
+  }
+
+  validateForm() {
+    const maxNumberPerAtt = 90;
+    const maxSumAtt = 210;
+    const {
+      cardName, cardDescription, cardAttr1,
+      cardAttr2, cardAttr3, cardImage } = this.state;
+
+    const array = [cardName, cardDescription, cardImage];
+    const notVoid = array.every((current) => current !== '');
+
+    const arrayNumbers = [Number(cardAttr1), Number(cardAttr2), Number(cardAttr3)];
+
+    const notVoidNumbers = arrayNumbers.every(
+      (current) => (current >= 0 && current <= maxNumberPerAtt),
+    );
+    const sumTotal = arrayNumbers.reduce((acc, current) => current + acc, 0) <= maxSumAtt;
+
+    if (notVoid && notVoidNumbers && sumTotal) {
+      this.setState({ isSaveButtonDisabled: false });
+    } else {
+      this.setState({ isSaveButtonDisabled: true });
+    }
   }
 
   render() {
