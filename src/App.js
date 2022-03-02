@@ -30,6 +30,8 @@ class App extends React.Component {
 
   onSaveButtonClick(event) {
     event.preventDefault();
+    const { cardName, cardDescription, cardAttr1,
+      cardAttr2, cardAttr3, cardImage, cardRare, cardTrunfo, data } = this.state;
     const object = {
       cardName,
       cardDescription,
@@ -39,18 +41,17 @@ class App extends React.Component {
       cardAttr1,
       cardAttr2,
       cardAttr3 };
-    this.setState(({ cardName, cardDescription, cardAttr1,
-      cardAttr2, cardAttr3, cardImage, cardRare, cardTrunfo, data }) => ({
-      [data]: [...data, ...object],
-      [cardName]: '',
-      [cardDescription]: '',
-      [cardImage]: '',
-      [cardRare]: 'normal',
-      [cardTrunfo]: false,
-      [cardAttr1]: 0,
-      [cardAttr2]: 0,
-      [cardAttr3]: 0,
-    }));
+    this.setState({
+      data: [...data, object],
+      cardName: '',
+      cardDescription: '',
+      cardImage: '',
+      cardRare: 'normal',
+      cardTrunfo: false,
+      cardAttr1: 0,
+      cardAttr2: 0,
+      cardAttr3: 0,
+    });
   }
 
   validateForm() {
