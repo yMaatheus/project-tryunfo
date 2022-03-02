@@ -1,14 +1,17 @@
 import React from 'react';
 import Card from './components/Card';
 import Form from './components/Form';
+import Search from './components/Search';
 
 class App extends React.Component {
   constructor() {
     super();
     this.onInputChange = this.onInputChange.bind(this);
-    this.validateForm = this.validateForm.bind(this);
+    this.onInputSearchChange = this.onInputSearchChange.bind(this);
+    this.onSearchButtonClick = this.onSearchButtonClick.bind(this);
     this.onSaveButtonClick = this.onSaveButtonClick.bind(this);
     this.onRemoveCardButtonClick = this.onRemoveCardButtonClick.bind(this);
+    this.validateForm = this.validateForm.bind(this);
     this.state = {
       cardName: '',
       cardDescription: '',
@@ -21,6 +24,10 @@ class App extends React.Component {
       hasTrunfo: false,
       isSaveButtonDisabled: true,
       data: [],
+      previewSearch: '',
+      search: '',
+      // searchRare: 'todos',
+      // searchTrunfo: false,
     };
   }
 
@@ -28,6 +35,20 @@ class App extends React.Component {
     this.setState({
       [name]: (type === 'checkbox' ? checked : value),
     }, this.validateForm);
+  }
+
+  onInputSearchChange({ target: { type, name, value, checked } }) {
+    this.setState({
+      [name]: (type === 'checkbox' ? checked : value),
+    });
+  }
+
+  onSearchButtonClick(event) {
+    event.preventDefault();
+    // const { previewSearch } = this.state;
+    // this.setState({
+    //   search: previewSearch,
+    // });
   }
 
   onSaveButtonClick(event) {
@@ -59,7 +80,9 @@ class App extends React.Component {
     });
   }
 
-  onRemoveCardButtonClick({ target: { name } }) {
+  onRemoveCardButtonClick(event) {
+    event.preventDefault();
+    const { target: { name } } = event;
     const { hasTrunfo, data } = this.state;
     const card = data.find(({ cardName }) => name === cardName);
     this.setState({
@@ -87,9 +110,16 @@ class App extends React.Component {
 
   render() {
     const { cardName, cardDescription, cardAttr1, cardAttr2, cardAttr3, cardImage,
-      cardRare, cardTrunfo, hasTrunfo, isSaveButtonDisabled, data } = this.state;
+      cardRare, cardTrunfo, hasTrunfo, isSaveButtonDisabled, data,
+      previewSearch, search } = this.state;
     return (
       <main>
+        <Search
+          previewSearch={ previewSearch }
+          search={ search }
+          onInputSearchChange={ this.onInputSearchChange }
+          onSearchButtonClick={ this.onSearchButtonClick }
+        />
         <Form
           cardName={ cardName }
           cardDescription={ cardDescription }
@@ -114,7 +144,9 @@ class App extends React.Component {
           cardRare={ cardRare }
           cardTrunfo={ cardTrunfo }
         />
-        {data.map((card, index) => (
+        {data.filter(
+          (card) => (card.cardName.includes(search)),
+        ).map((card, index) => (
           <section key={ index }>
             <Card
               cardName={ card.cardName }
