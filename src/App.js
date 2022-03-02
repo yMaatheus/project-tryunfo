@@ -60,7 +60,7 @@ class App extends React.Component {
   }
 
   onRemoveCardButtonClick({ target: { name } }) {
-    const { data } = this.state;
+    const { hasTrunfo, data } = this.state;
     const card = data.find(({ cardName }) => name === cardName);
     this.setState({
       hasTrunfo: card.cardTrunfo ? false : hasTrunfo,
