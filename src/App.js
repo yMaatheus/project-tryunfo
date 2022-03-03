@@ -26,8 +26,8 @@ class App extends React.Component {
       data: [],
       previewSearch: '',
       search: '',
-      // searchRare: 'todos',
-      // searchTrunfo: false,
+      searchRare: 'todas',
+      searchTrunfo: false,
     };
   }
 
@@ -111,12 +111,14 @@ class App extends React.Component {
   render() {
     const { cardName, cardDescription, cardAttr1, cardAttr2, cardAttr3, cardImage,
       cardRare, cardTrunfo, hasTrunfo, isSaveButtonDisabled, data,
-      previewSearch, search } = this.state;
+      previewSearch, search, searchRare, searchTrunfo } = this.state;
     return (
       <main>
         <Search
           previewSearch={ previewSearch }
           search={ search }
+          searchRare={ searchRare }
+          searchTrunfo={ searchTrunfo }
           onInputSearchChange={ this.onInputSearchChange }
           onSearchButtonClick={ this.onSearchButtonClick }
         />
@@ -144,30 +146,34 @@ class App extends React.Component {
           cardRare={ cardRare }
           cardTrunfo={ cardTrunfo }
         />
-        {data.filter(
-          (card) => (card.cardName.includes(search)),
-        ).map((card, index) => (
-          <section key={ index }>
-            <Card
-              cardName={ card.cardName }
-              cardDescription={ card.cardDescription }
-              cardAttr1={ card.cardAttr1 }
-              cardAttr2={ card.cardAttr2 }
-              cardAttr3={ card.cardAttr3 }
-              cardImage={ card.cardImage }
-              cardRare={ card.cardRare }
-              cardTrunfo={ card.cardTrunfo }
-            />
-            <button
-              type="submit"
-              name={ card.cardName }
-              onClick={ this.onRemoveCardButtonClick }
-              data-testid="delete-button"
-            >
-              Excluir
+        {data
+          .filter((card) => (card.cardName.toLowerCase().includes(search.toLowerCase())))
+          .filter((card) => (searchRare === 'todas'
+            ? true : card.cardRare === searchRare))
+          .filter((card) => (searchTrunfo
+            ? card.cardTrunfo : true))
+          .map((card, index) => (
+            <section key={ index }>
+              <Card
+                cardName={ card.cardName }
+                cardDescription={ card.cardDescription }
+                cardAttr1={ card.cardAttr1 }
+                cardAttr2={ card.cardAttr2 }
+                cardAttr3={ card.cardAttr3 }
+                cardImage={ card.cardImage }
+                cardRare={ card.cardRare }
+                cardTrunfo={ card.cardTrunfo }
+              />
+              <button
+                type="submit"
+                name={ card.cardName }
+                onClick={ this.onRemoveCardButtonClick }
+                data-testid="delete-button"
+              >
+                Excluir
 
-            </button>
-          </section>))}
+              </button>
+            </section>))}
       </main>
     );
   }
