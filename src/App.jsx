@@ -1,7 +1,7 @@
 import React from 'react';
+import Header from './components/Header';
 import AddCard from './components/AddCard';
 import Cards from './components/Cards';
-import Header from './components/Header';
 import Search from './components/Search';
 
 class App extends React.Component {
@@ -9,8 +9,8 @@ class App extends React.Component {
     return (
       <>
         <Header />
-        <Search />
         <AddCard />
+        <Search />
         <Cards />
       </>
     );
