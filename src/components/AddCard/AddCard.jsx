@@ -72,9 +72,9 @@ function AddCard() {
   };
 
   return (
-    <>
+    <S.Container>
       <S.Form>
-        <h2>Adicione nova Carta</h2>
+        <S.FormTitle>ADICIONE NOVA CARTA</S.FormTitle>
         <label htmlFor="name-input">
           <input
             type="text"
@@ -172,7 +172,8 @@ function AddCard() {
           Salvar
         </button>
       </S.Form>
-      <section>
+      <S.CardWrapper>
+        <S.PreviewTitle>PRÉ-VISUALIZAÇÃO</S.PreviewTitle>
         <Card
           cardName={ name }
           cardDescription={ description }
@@ -183,8 +184,8 @@ function AddCard() {
           cardRare={ rare }
           cardTrunfo={ trunfo }
         />
-      </section>
-    </>
+      </S.CardWrapper>
+    </S.Container>
   );
 }
 
