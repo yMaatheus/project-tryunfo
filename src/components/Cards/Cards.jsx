@@ -1,6 +1,7 @@
 import React from 'react';
 import useAppStore from '../../store';
 import Card from '../Card/Card';
+import * as S from './styles';
 
 function Cards() {
   const data = useAppStore((state) => state.data);
@@ -18,14 +19,14 @@ function Cards() {
   };
 
   return (
-    <>
+    <S.Container>
       {data
         .filter((card) => (card.cardName.toLowerCase().includes(search.toLowerCase())))
         .filter((card) => (searchRare === 'todas' ? true : card.cardRare === searchRare))
         .filter((card) => (searchTrunfo
           ? card.cardTrunfo : true))
         .map((card, index) => (
-          <section key={ index }>
+          <S.CardWrapper key={ index }>
             <Card
               cardName={ card.cardName }
               cardDescription={ card.cardDescription }
@@ -44,8 +45,9 @@ function Cards() {
             >
               Excluir
             </button>
-          </section>))}
-    </>
+          </S.CardWrapper>
+        ))}
+    </S.Container>
   );
 }
 
