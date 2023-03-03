@@ -1,5 +1,5 @@
 :root {
-  --main-color-green: #036b52;
+  --main-color: #036b52;
   --secondary-color: #023031;
   --accent-color: #2fc18c;
   --error-color: #b01726;
@@ -11,20 +11,9 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: 'Epilogue', 'Segoe UI', 'Roboto', 'Ubuntu', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
-
-h1, h2, h3, h4 {
-  color: var(--white);
-}
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
 }
 
 body {
