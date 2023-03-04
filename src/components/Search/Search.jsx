@@ -1,16 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
 import * as S from './styles';
 import useAppStore from '../../store';
 
 function Search() {
-  const [search, setSearch] = useState('');
-  const [searchRare, setSearchRare] = useState('todas');
-  const [searchTrunfo, setSearchTrunfo] = useState(false);
-
-  const onSearchButtonClick = (event) => {
-    event.preventDefault();
-    useAppStore.setState({ search, searchRare, searchTrunfo });
-  };
+  const search = useAppStore((state) => state.search);
+  const searchRare = useAppStore((state) => state.searchRare);
+  const searchTrunfo = useAppStore((state) => state.searchTrunfo);
 
   return (
     <S.Container>
@@ -22,7 +17,7 @@ function Search() {
             id="searchName"
             name="search"
             value={ search }
-            onChange={ (event) => setSearch(event.target.value) }
+            onChange={ (event) => useAppStore.setState({ search: event.target.value }) }
             data-testid="name-filter"
           />
         </label>
@@ -31,7 +26,9 @@ function Search() {
             id="searchRare"
             name="searchRare"
             value={ searchRare }
-            onChange={ (event) => setSearchRare(event.target.value) }
+            onChange={ (event) => (
+              useAppStore.setState({ searchRare: event.target.value })
+            ) }
             data-testid="rare-filter"
           >
             <option>todas</option>
@@ -46,11 +43,10 @@ function Search() {
             id="searchTrunfo"
             name="searchTrunfo"
             defaultChecked={ searchTrunfo }
-            onChange={ () => setSearchTrunfo(!searchTrunfo) }
+            onChange={ () => useAppStore.setState({ searchTrunfo: !searchTrunfo }) }
             data-testid="trunfo-filter"
           />
         </label>
-        <button type="submit" onClick={ onSearchButtonClick }>Buscar</button>
       </S.Form>
     </S.Container>
   );
