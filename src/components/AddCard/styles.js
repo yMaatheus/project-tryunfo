@@ -50,3 +50,27 @@ export const PreviewTitle = styled.h2`
 
   color: var(--accent-color);
 `;
+
+export const Label = styled.label`
+  color: var(--grey);
+`;
+
+export const InputText = styled.input`
+
+`;
+
+export const TextArea = styled.textarea`
+
+`;
+
+export const InputNumber = styled.input`
+
+`;
+
+export const Select = styled.select`
+
+`;
+
+export const CheckBox = styled.input`
+
+`;
