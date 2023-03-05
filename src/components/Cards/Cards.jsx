@@ -1,6 +1,6 @@
 import React from 'react';
 import useAppStore from '../../store';
-import Card from '../Card/Card';
+import CardContainer from '../Card/CardContainer';
 import * as S from './styles';
 
 function Cards() {
@@ -27,7 +27,7 @@ function Cards() {
           ? card.cardTrunfo : true))
         .map((card, index) => (
           <S.CardWrapper key={ index }>
-            <Card
+            <CardContainer
               cardName={ card.cardName }
               cardDescription={ card.cardDescription }
               cardAttr1={ card.cardAttr1 }
@@ -36,15 +36,8 @@ function Cards() {
               cardImage={ card.cardImage }
               cardRare={ card.cardRare }
               cardTrunfo={ card.cardTrunfo }
+              buttonClick={ onRemoveCardButtonClick }
             />
-            <button
-              type="submit"
-              name={ card.cardName }
-              onClick={ onRemoveCardButtonClick }
-              data-testid="delete-button"
-            >
-              Excluir
-            </button>
           </S.CardWrapper>
         ))}
     </S.Container>

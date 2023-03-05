@@ -1,5 +1,5 @@
 import React from 'react';
-import Card from '../Card';
+import CardContainer from '../Card';
 import * as S from './styles';
 import AddCardForm from './AddCardForm';
 import useAddCardStore from '../../store/AddCardStore';
@@ -12,7 +12,7 @@ function AddCard() {
       <AddCardForm />
       <S.CardWrapper>
         <S.PreviewTitle>PRÉ-VISUALIZAÇÃO</S.PreviewTitle>
-        <Card
+        <CardContainer
           cardName={ name }
           cardDescription={ description }
           cardAttr1={ attr1 }
