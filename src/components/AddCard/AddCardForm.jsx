@@ -7,6 +7,7 @@ import Button from '../Button';
 function AddCardForm() {
   const maxNumberPerAtt = 90;
   const maxSumAtt = 210;
+  const maxTextAreaLenght = 180;
 
   const {
     name,
@@ -84,8 +85,12 @@ function AddCardForm() {
           data-testid="description-input"
           placeholder="Descrição"
           rows="5"
+          cols="60"
           value={ description }
-          onChange={ (event) => setGlobalState({ description: event.target.value }) }
+          onChange={ (event) => (
+            event.target.value.length <= maxTextAreaLenght
+            && setGlobalState({ description: event.target.value })
+          ) }
         />
       </S.Label>
       <S.Label htmlFor="attr1-input">
@@ -165,6 +170,7 @@ function AddCardForm() {
         onClick={ onButtonClick }
         disabled={ isSaveButtonDisabled }
         label="Salvar"
+        buttonName={ name }
       />
     </S.Form>
   );
