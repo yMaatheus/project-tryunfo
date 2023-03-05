@@ -1,24 +1,50 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import * as S from './styles';
+import Button from '../Button';
+import logoSuperTrunfo from '../../assets/logo-super-trunfo.svg';
 
-class Card extends React.Component {
-  render() {
-    const { cardName, cardDescription, cardAttr1, cardAttr2,
-      cardAttr3, cardImage, cardRare, cardTrunfo } = this.props;
-    return (
-      <S.Container>
+function Card(props) {
+  const { cardName, cardDescription, cardAttr1, cardAttr2,
+    cardAttr3, cardImage, cardRare, cardTrunfo, buttonClick } = props;
+  return (
+    <S.Card>
+      <S.NameWrapper>
         <S.Name data-testid="name-card">{cardName}</S.Name>
-        <S.Image src={ cardImage } alt={ cardName } data-testid="image-card" />
-        <S.Description data-testid="description-card">{cardDescription}</S.Description>
-        <S.Attr data-testid="attr1-card">{cardAttr1}</S.Attr>
-        <S.Attr data-testid="attr2-card">{cardAttr2}</S.Attr>
-        <S.Attr data-testid="attr3-card">{cardAttr3}</S.Attr>
-        <S.Attr data-testid="rare-card">{cardRare}</S.Attr>
-        {cardTrunfo && <span data-testid="trunfo-card">Super Trunfo</span>}
-      </S.Container>
-    );
-  }
+      </S.NameWrapper>
+      <S.Image src={ cardImage } alt={ cardName } data-testid="image-card" />
+      {cardTrunfo && (<S.SuperTrunfoImage
+        src={ logoSuperTrunfo }
+        alt="Logo Super Trunfo"
+      />)}
+      <S.Description>{cardDescription}</S.Description>
+      <S.AttrWrapper>
+        <S.AttrCards>
+          <S.Attr data-testid="attr1-card">
+            Attr01....................................
+            <S.AttrValue>{cardAttr1}</S.AttrValue>
+          </S.Attr>
+          <S.Attr data-testid="attr2-card">
+            Attr02....................................
+            <S.AttrValue>{cardAttr2}</S.AttrValue>
+          </S.Attr>
+          <S.Attr data-testid="attr3-card">
+            Attr03....................................
+            <S.AttrValue>{cardAttr3}</S.AttrValue>
+          </S.Attr>
+          <S.Attr data-testid="rare-card">
+            Rare..............................
+            <S.AttrValue>{cardRare}</S.AttrValue>
+          </S.Attr>
+        </S.AttrCards>
+        {buttonClick && (<Button
+          onClick={ buttonClick }
+          buttonName={ cardName }
+          label="Excluir"
+        />)}
+      </S.AttrWrapper>
+    </S.Card>
+  );
 }
 
 Card.propTypes = {
@@ -30,6 +56,7 @@ Card.propTypes = {
   cardImage: PropTypes.string,
   cardRare: PropTypes.string,
   cardTrunfo: PropTypes.bool,
+  buttonClick: PropTypes.func,
 }.isRequired;
 
 export default Card;
