@@ -6,7 +6,7 @@ const useAddCardStore = create((set) => ({
   attr1: 1,
   attr2: 1,
   attr3: 1,
-  image: '',
+  image: 'https://images.dog.ceo/breeds/spaniel-blenheim/n02086646_1535.jpg',
   rare: 'normal',
   trunfo: false,
   reset: () => set({
@@ -15,7 +15,7 @@ const useAddCardStore = create((set) => ({
     attr1: 1,
     attr2: 1,
     attr3: 1,
-    image: '',
+    image: 'https://images.dog.ceo/breeds/spaniel-blenheim/n02086646_1535.jpg',
     rare: 'normal',
     trunfo: false,
   }),
