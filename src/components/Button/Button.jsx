@@ -4,7 +4,7 @@ import * as S from './styles';
 
 class Button extends Component {
   render() {
-    const { label = '', onClick, disabled = false,
+    const { label = '', onClick, disabled = false, buttonName = '',
       id = '', value = '', className = '', img = '' } = this.props;
     return (
       <S.Button
@@ -15,6 +15,7 @@ class Button extends Component {
         className={ className }
         data-testid={ id }
         src={ img }
+        name={ buttonName }
       >
         { label }
         {img && (<S.Image
@@ -36,6 +37,7 @@ Button.propTypes = {
   disabled: PropTypes.bool,
   className: PropTypes.string,
   img: PropTypes.string,
+  buttonName: PropTypes.string,
 };
 
 Button.defaultProps = {
@@ -44,4 +46,5 @@ Button.defaultProps = {
   className: '',
   disabled: false,
   img: '',
+  buttonName: PropTypes.string,
 };
