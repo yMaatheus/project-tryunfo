@@ -25,5 +25,18 @@ export const Title = styled.h2`
 `;
 
 export const Form = styled.form`
+  display: flex;
+  gap: 2rem;
+`;
 
+export const Label = styled.label`
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 150%;
+
+  color: var(--white);
+
+  display: flex;
+  gap: 6px;
 `;
