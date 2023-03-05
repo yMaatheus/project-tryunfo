@@ -11,7 +11,8 @@ export const Container = styled.section`
   background-color: var(--white);
   border-radius: 2%;
   width: 50%;
-  height: 500px;
+  max-width: 50%;
+  height: 860px;
 `;
 
 export const Form = styled.form`
@@ -19,6 +20,7 @@ export const Form = styled.form`
   justify-content: space-evenly;
   flex-direction: column;
   height: 80%;
+  max-height: 80%;
 `;
 
 export const FormTitle = styled.h2`
@@ -33,14 +35,14 @@ export const FormTitle = styled.h2`
 
 export const CardWrapper = styled.div`
   display: flex;
-  justify-content: space-between;
+  gap: 1rem;
   flex-direction: column;
-  height: 60%;
+  align-items: center;
+  max-width: 100%;
+  max-height: 100%;
 `;
 
 export const PreviewTitle = styled.h2`
-  align-self: flex-start;
-
   font-style: italic;
   font-weight: 800;
   font-size: 28px;
@@ -53,6 +55,9 @@ export const PreviewTitle = styled.h2`
 
 export const Label = styled.label`
   color: var(--grey);
+
+  display: flex;
+  gap: 6px;
 `;
 
 export const InputText = styled.input`
